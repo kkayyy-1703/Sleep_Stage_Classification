@@ -6,33 +6,6 @@ This repository contains code, data pointers, and reproduction instructions for 
 
 ---
 
-## Repository layout
-
-```
-Sleep-Stage-Classification/
-│
-├── data/
-│   ├── raw/                # Raw CSV exports (wearable streams) — source repo noted below
-│   └── processed/          # Preprocessed numpy / csv files
-│
-├── models/                 # placeholder: trained models (not included)
-│   └── README.md
-│
-├── training.py             # baseline training pipeline (or cnn_lstm_attention.py)
-├── cnn_lstm_attention.py   # baseline + attention (if present)
-├── cnn_bilstm_pseudoqnn.py # advanced hybrid model training script
-├── train_qnn.py            # QNN / quantum-hybrid experiments (or 6_Qubits_4_layers.py)
-├── evaluation.py           # plotting & metrics
-│
-├── qnn/                    # (optional) PennyLane / QNN utilities
-│
-├── results/                # accuracy/loss plots, confusion matrices
-│
-└── README.md               # this file
-```
-
----
-
 ## One-line summary
 
 Train and evaluate deep and hybrid models (CNN–LSTM baseline, CNN–BiLSTM–Self-Attention–PseudoQNN hybrid, and quantum-inspired QNN variants) on wearable-derived signals (activity counts, heart-rate features, and a clock proxy) to predict multiple sleep stages (Wake, N1, N2, N3, REM).
@@ -126,26 +99,10 @@ python cnn_bilstm_pseudoqnn.py
 5. Run QNN experiments (simulators):
 
 ```bash
-python train_qnn.py
-# or python 6_Qubits_4_layers.py depending on the script naming in this repo
-```
-
-6. Generate evaluation plots:
-
-```bash
-python evaluation.py
-# figures will be saved to results/
+python 6_Qubits_4_layers.py
 ```
 
 > Training may take several hours on CPU. GPU (CUDA) is strongly recommended for deep models. QNN simulations can be slow for larger qubit counts; to run quick tests, use fewer qubits or a smaller dataset sample.
-
----
-
-## Models / files policy
-
-* Trained model weights are not included in this repository to keep it lightweight and reproducible.
-* After running the training scripts, model weights will be saved to `models/` (for example: `models/cnn_lstm_best.h5`).
-* If a prebuilt model release is provided later, it will be documented in `models/README.md` with download instructions.
 
 ---
 
@@ -153,14 +110,6 @@ python evaluation.py
 
 * Baseline and advanced hybrid models achieve strong performance on wearable-derived signals; per-paper numeric tables, ablation studies, and class-wise metrics are documented in the attached papers and the `results/` folder.
 * QNN experiments provide exploratory baselines on classical simulators; some shallow quantum-hybrid configurations produced competitive results in simulator settings. See `results/` for plots and the QNN paper for detailed numbers and discussion.
-
----
-
-## Resume / LinkedIn bullets (examples)
-
-* Developed a CNN–LSTM pipeline for 5-class sleep-stage classification using wearable signals; implemented preprocessing, sliding-window feature engineering, and end-to-end training/evaluation.
-* Designed and evaluated a CNN–BiLSTM–Self-Attention–PseudoQNN hybrid that improved per-class recall and overall classification metrics over the baseline.
-* Explored quantum-hybrid QNN baselines (PennyLane-backed simulators) for sleep-stage classification; to our knowledge, these QNN experiments are among the earliest applications of QNNs to wearable sleep-stage classification.
 
 ---
 
